@@ -3,6 +3,7 @@
 
 import sys
 import time
+import re
 
 
 WELCOME_MESSAGE = """Welcome to the shop simulator!
@@ -50,12 +51,43 @@ def select_inventory_setup() -> str:
     return inventory_setup.lower().strip()
 
 
+class Cake():
+    """Cake class"""
+
+    def __init__(self, name: str, price: int, amount: int, allergies: str = "None") -> None:
+        """Initialise cake class with specified properties"""
+
+        if not isinstance(price, int) or not isinstance(amount, int):
+            raise TypeError("Price & Value should both be integer types!")
+        if price < 0:
+            raise ValueError("Price cannot be negative!")
+        if amount < 0:
+            raise ValueError("Cannot have negative amount of produce!")
+
+        self._name = re.sub(" +", " ", name.strip().title())
+        self._price = price
+        self._amount = amount
+        self._allergies = allergies
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def price(self):
+        return self._price
+
+    @property
+    def amount(self):
+        return self._amount
+
+
 def run_simulation_start() -> None:
     """Runs whole simulation"""
 
-    # message_in_terminal(WELCOME_MESSAGE)
-    # pause_terminal()
-    # setup_instructions()
+    message_in_terminal(WELCOME_MESSAGE)
+    pause_terminal()
+    setup_instructions()
 
     inventory_setup = select_inventory_setup()
 
