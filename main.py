@@ -1,4 +1,4 @@
-"""Main file programme should run in"""
+"""Main file simulation can run from"""
 
 from components.sim_startup import run_simulation_start
 
