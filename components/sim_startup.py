@@ -5,7 +5,7 @@ import sys
 import time
 import re
 
-from component_classes import Food
+from component_classes import Cupcake, Shop
 
 
 WELCOME_MESSAGE = """Welcome to the shop simulator!
@@ -68,12 +68,23 @@ def get_user_shop_name() -> str:
     return user_shop_name
 
 
-def create_default_inventory() -> list[Food]:
-    """Creates a default inventory for user to use"""
+def create_default_inventory(user_shop: Shop) -> Shop:
+    """Adds default items to user shop stock"""
 
-    inventory = []
+    default_chocolate_cupcakes = Cupcake("chocolate", 499, 5)
+    default_vanilla_cupcakes = Cupcake("vanilla", 499, 5)
+    default_strawberry_cupcakes = Cupcake("strawberry", 699, 2)
 
-    return inventory
+    message_in_terminal("Adding to stock...")
+    message_in_terminal("....", 0.35)
+
+    user_shop.add_food_item_to_stock(default_chocolate_cupcakes)
+    user_shop.add_food_item_to_stock(default_vanilla_cupcakes)
+    user_shop.add_food_item_to_stock(default_strawberry_cupcakes)
+
+    message_in_terminal("Successfully added items to stock!")
+
+    return user_shop
 
 
 def run_simulation_start() -> None:
@@ -87,12 +98,9 @@ def run_simulation_start() -> None:
 
     if inventory_setup == "default":
 
-        message_in_terminal("Creating default inventory...")
-        message_in_terminal("....", 0.5)
-        message_in_terminal("Successfully created default inventory")
-
-        user_inventory = create_default_inventory()
-        print(user_inventory)
+        user_shop_name = get_user_shop_name()
+        user_shop = Shop(user_shop_name)
+        user_shop = create_default_inventory(user_shop)
 
     else:
         print("custom")
@@ -101,5 +109,3 @@ def run_simulation_start() -> None:
 if __name__ == "__main__":
 
     run_simulation_start()
-
-    shop_name = get_user_shop_name()
