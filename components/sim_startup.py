@@ -51,8 +51,8 @@ def select_inventory_setup() -> str:
     return inventory_setup.lower().strip()
 
 
-class Cake():
-    """Cake class"""
+class Food():
+    """Food class"""
 
     def __init__(self, name: str, price: int, amount: int, allergies: str = "None") -> None:
         """Initialise cake class with specified properties"""
@@ -82,8 +82,28 @@ class Cake():
         return self._amount
 
 
+class Cupcake(Food):
+    """Cupcake class"""
+
+    def __init__(self, name: str, price: int, amount: int, allergies: str = "None") -> None:
+        super().__init__(name, price, amount, allergies)
+
+
+class Cake(Food):
+    """Cake class"""
+
+    def __init__(self, name: str, price: int, amount: int, size: int, allergies: str = "None") -> None:
+        super().__init__(name, price, amount, allergies)
+
+        self._size = size
+
+    @property
+    def size(self):
+        return self._size
+
+
 def run_simulation_start() -> None:
-    """Runs whole simulation"""
+    """Runs whole simulation start up procedure"""
 
     message_in_terminal(WELCOME_MESSAGE)
     pause_terminal()
