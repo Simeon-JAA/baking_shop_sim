@@ -50,8 +50,10 @@ class Food():
 class Cupcake(Food):
     """Cupcake class"""
 
-    def __init__(self, name: str, price: int, amount: int, allergies: str = "None") -> None:
-        super().__init__(name, price, amount, allergies)
+    def __init__(self, flavor: str, price: int, amount: int, allergies: str = "None") -> None:
+        super().__init__(flavor, price, amount, allergies)
+
+        self._name = re.sub(" +", " ", flavor.title().strip()) + " Cupcake"
 
 
 class Cake(Food):
