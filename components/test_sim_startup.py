@@ -3,7 +3,7 @@
 import pytest
 
 
-from sim_startup import Cupcake
+from component_classes import Cupcake
 
 
 def test_cake_class_works():
