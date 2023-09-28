@@ -35,15 +35,15 @@ class Food():
         self._allergies = allergies
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self._name
 
     @property
-    def price(self):
+    def price(self) -> int:
         return self._price
 
     @property
-    def amount(self):
+    def amount(self) -> int:
         return self._amount
 
 
@@ -78,7 +78,7 @@ class Shop():
         self._shop_stock = []
 
     @property
-    def shop_name(self):
+    def shop_name(self) -> str:
         return self._shop_name
 
     @property
@@ -100,6 +100,18 @@ class Shop():
         """Displays shop stock for user"""
 
         pass
+
+
+class User():
+    """User class containing user stats"""
+
+    def __init__(self, username: str,) -> None:
+        """Initialise user class with name and stats"""
+        self._username = username
+
+    @property
+    def username(self) -> str:
+        return self._username
 
 
 if __name__ == "__main__":
