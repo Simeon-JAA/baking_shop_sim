@@ -87,8 +87,8 @@ def create_default_inventory(user_shop: Shop) -> Shop:
     return user_shop
 
 
-def run_simulation_start() -> None:
-    """Runs whole simulation start up procedure"""
+def run_simulation_start() -> Shop:
+    """Runs whole simulation start up procedure and returns user shop to work with moving forward"""
 
     message_in_terminal(WELCOME_MESSAGE)
     pause_terminal()
@@ -103,9 +103,12 @@ def run_simulation_start() -> None:
         user_shop = create_default_inventory(user_shop)
 
     else:
-        print("custom")
+        # TODO Add option for custom inventory build
+        print("Custom inventory is still in progress. Exiting simulation")
+
+    return user_shop
 
 
 if __name__ == "__main__":
 
-    run_simulation_start()
+    user_shop = run_simulation_start()
