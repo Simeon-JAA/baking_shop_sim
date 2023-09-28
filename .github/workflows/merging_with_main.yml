@@ -34,4 +34,4 @@ jobs:
     - name: Install Requirements
       run: pip3 install -r requirements.txt
     - name: Run Pytest on all test files
-      run: pytest *test_*.py
+      run: pytest components/test_*.py
