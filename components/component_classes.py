@@ -105,13 +105,60 @@ class Shop():
 class User():
     """User class containing user stats"""
 
-    def __init__(self, username: str,) -> None:
+    def __init__(self, username: str, email: str = None) -> None:
         """Initialise user class with name and stats"""
+
+        if len(username) < 6:
+            raise ValueError(
+                "Invalid Username: Minimum characters requires is 6!")
+        if len(username) > 20:
+            raise ValueError(
+                "Invalid Username: Maximum characters allowed is 20!")
+        if not re.search("[a-zA-Z0-9!_-]{6,20}", username) or username.count(" ") > 0:
+            raise ValueError(
+                "Invalid Username: Username contains spaces or invalid characters!")
+
+        if email:
+            if email.count(" ") > 0:
+                raise ValueError("Invalid email: Email cannot contain spaces!")
+            if not re.search("[a-zA-Z0-9._-]+@[a-zA-Z]+.[a-z]{2,3}(.[a-z]{2})?", email):
+                raise ValueError(
+                    "Invalid email: Email does not fall within format constraint!")
+
+            self._email = email
+
+        else:
+            self._email = email
+
         self._username = username
+        self._xp = 0
+        self._level = 1
+        self._good_luck = 10
+        self._bad_luck = 0
 
     @property
     def username(self) -> str:
         return self._username
+
+    @property
+    def email(self) -> str:
+        return self._email
+
+    @property
+    def level(self) -> int:
+        return self._level
+
+    @property
+    def xp(self) -> int:
+        return self._xp
+
+    @property
+    def good_luck(self) -> int:
+        return self._good_luck
+
+    @property
+    def bad_luck(self) -> int:
+        return self._bad_luck
 
 
 if __name__ == "__main__":
