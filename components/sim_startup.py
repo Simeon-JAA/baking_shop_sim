@@ -68,8 +68,12 @@ def get_user_shop_name() -> str:
     return user_shop_name
 
 
-def create_default_inventory(user_shop: Shop) -> Shop:
+def create_default_shop_and_inventory() -> Shop:
     """Adds default items to user shop stock"""
+
+    user_shop_name = get_user_shop_name()
+
+    user_shop = Shop(user_shop_name)
 
     default_chocolate_cupcakes = Cupcake("chocolate", 499, 5)
     default_vanilla_cupcakes = Cupcake("vanilla", 499, 5)
@@ -98,9 +102,7 @@ def run_simulation_start() -> Shop:
 
     if inventory_setup == "default":
 
-        user_shop_name = get_user_shop_name()
-        user_shop = Shop(user_shop_name)
-        user_shop = create_default_inventory(user_shop)
+        user_shop = create_default_shop_and_inventory()
 
     else:
         # TODO Add option for custom inventory build
