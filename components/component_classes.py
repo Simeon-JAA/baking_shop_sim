@@ -133,6 +133,7 @@ class User():
         self._username = username
         self._xp = 0
         self._level = 1
+        self._max_xp = int((self.level / 0.5) ** 2.2)
         self._good_luck = 10
         self._bad_luck = 0
         self._max_luck = 100
@@ -152,6 +153,10 @@ class User():
     @property
     def xp(self) -> int:
         return self._xp
+
+    @property
+    def max_xp(self) -> int:
+        return self._max_xp
 
     @property
     def good_luck(self) -> int:
@@ -191,8 +196,32 @@ class User():
         if self.bad_luck > self.max_luck:
             self._bad_luck = self.max_luck
 
+    def gain_xp(self, value: int) -> None:
+        """Adds xp to the user account"""
+
+        if not isinstance(value, (int, float)):
+            raise TypeError("Error: XP should be int or decimal type!")
+        if value <= 0:
+            raise ValueError("Error: Cannot gain zero or negative xp!")
+
+        xp_to_level_up = self.max_xp - self.xp
+
+        value = int(value)
+
+        if value < xp_to_level_up:
+            self._xp += value
+
+        if value == xp_to_level_up:
+            self._xp = 0
+            self._level += 1
+
+        if value > xp_to_level_up:
+            self._xp = value - xp_to_level_up
+            self._level += 1
+
 
 if __name__ == "__main__":
 
-    example_user = User("Example")
-    print(example_user.good_luck)
+    example = User("example")
+
+    print(example.max_xp)
