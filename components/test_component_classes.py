@@ -149,3 +149,54 @@ def test_class_user_increase_bad_limited_to_0():
     example.alter_bad_luck(-5000)
 
     assert example.bad_luck == 0
+
+
+def test_class_user_gain_xp_negative_xp_raise_exception():
+    """Tests gaining minus xp raises exception"""
+
+    example = User("example")
+
+    with pytest.raises(Exception):
+        example.gain_xp(-40)
+
+
+def test_class_user_gain_xp_wrong_type_xp_raise_exception():
+    """Tests wrong type of xp raises exception"""
+
+    example = User("example")
+
+    with pytest.raises(Exception):
+        example.gain_xp("not xp")
+
+
+def test_class_user_gain_xp_0_xp_raise_exception():
+    """Tests 0 xp gained raises exception"""
+
+    example = User("example")
+
+    with pytest.raises(Exception):
+        example.gain_xp(0)
+
+
+def test_class_user_gain_xp_level_up_excess():
+    """Tests more than enough xp to level up works"""
+
+    example = User("example")
+    starting_level = example.level
+    xp_to_level_up = example.max_xp + 1
+    example.gain_xp(xp_to_level_up)
+
+    assert example.level > starting_level
+    assert example.xp == 1
+
+
+def test_class_user_gain_xp_level_up_exact():
+    """Tests enough xp to level up works"""
+
+    example = User("example")
+    starting_level = example.level
+    xp_to_level_up = example.max_xp
+    example.gain_xp(xp_to_level_up)
+
+    assert example.level > starting_level
+    assert example.xp == 0
