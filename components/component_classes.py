@@ -103,10 +103,10 @@ class Shop():
 
 
 class User():
-    """User class containing user stats"""
+    """User Class contains user information and stats"""
 
     def __init__(self, username: str, email: str = None) -> None:
-        """Initialise user class with name and stats"""
+        """Initialise user class with name and default stats"""
 
         if len(username) < 6:
             raise ValueError(
@@ -135,6 +135,7 @@ class User():
         self._level = 1
         self._good_luck = 10
         self._bad_luck = 0
+        self._max_luck = 100
 
     @property
     def username(self) -> str:
@@ -160,7 +161,38 @@ class User():
     def bad_luck(self) -> int:
         return self._bad_luck
 
+    @property
+    def max_luck(self) -> int:
+        return self._max_luck
+
+    @good_luck.setter
+    def good_luck(self) -> None:
+        """Constraints of good_luck stat"""
+        if self.good_luck < 0:
+            self._good_luck = 0
+        if self.good_luck > self.max_luck:
+            self._good_luck = self.max_luck
+
+    # TODO workout setter methods to implement constraints (good luck)
+    def alter_good_luck(self, value: int) -> None:
+        """Alter value of good luck stat"""
+        self._good_luck += value
+        if self.good_luck < 0:
+            self._good_luck = 0
+        if self.good_luck > self.max_luck:
+            self._good_luck = self.max_luck
+
+    # TODO workout setter methods to implement constraints (bad luck)
+    def alter_bad_luck(self, value: int) -> None:
+        """Alter value of bad luck stat"""
+        self._bad_luck += value
+        if self.bad_luck < 0:
+            self._bad_luck = 0
+        if self.bad_luck > self.max_luck:
+            self._bad_luck = self.max_luck
+
 
 if __name__ == "__main__":
 
-    pass
+    example_user = User("Example")
+    print(example_user.good_luck)

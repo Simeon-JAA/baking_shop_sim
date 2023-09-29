@@ -93,3 +93,59 @@ def test_class_user_invalid_username_too_long():
 
     with pytest.raises(Exception):
         User("sebdimouedoigyhwbisuyb")
+
+
+def test_class_user_increase_good_luck_works():
+    """Tests increasing the good luck stat works"""
+
+    example = User("Example")
+    luck_stat_start = example.good_luck
+    example.alter_good_luck(19)
+
+    assert luck_stat_start < example.good_luck
+
+
+def test_class_user_increase_good_luck_limited_to_max():
+    """Tests increasing the good luck stat is limited to max luck stat"""
+
+    example = User("Example")
+    example.alter_good_luck(1000)
+
+    assert example.good_luck == example.max_luck
+
+
+def test_class_user_increase_good_limited_to_0():
+    """Tests decreasing the good luck stat is limited to 0"""
+
+    example = User("Example")
+    example.alter_good_luck(-5000)
+
+    assert example.good_luck == 0
+
+
+def test_class_user_increase_bad_luck_works():
+    """Tests increasing the bad luck stat works"""
+
+    example = User("Example")
+    luck_stat_start = example.bad_luck
+    example.alter_bad_luck(19)
+
+    assert luck_stat_start < example.bad_luck
+
+
+def test_class_user_increase_bad_luck_limited_to_max():
+    """Tests increasing the bad luck stat is limited to max luck stat"""
+
+    example = User("Example")
+    example.alter_bad_luck(1000)
+
+    assert example.bad_luck == example.max_luck
+
+
+def test_class_user_increase_bad_limited_to_0():
+    """Tests decreasing the bad luck stat is limited to 0"""
+
+    example = User("Example")
+    example.alter_bad_luck(-5000)
+
+    assert example.bad_luck == 0
