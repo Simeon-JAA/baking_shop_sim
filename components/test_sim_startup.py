@@ -1,7 +1,6 @@
 """Testing file for sim_startup"""
 
 import pytest
-from pytest import MonkeyPatch
 
 
 from component_classes import Cupcake
