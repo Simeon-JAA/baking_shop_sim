@@ -65,18 +65,18 @@ def get_user_full_name() -> str:
     return user_full_name.strip().title()
 
 
-def get_user_email() -> str:
-    """Returns the users email for checking on the db"""
+def check_user_email(user_email: str) -> bool:
+    """Checks user email before checking the db"""
 
-    message_in_terminal("Please enter your email")
+    user_email = user_email.strip()
 
-    user_email = input("Enter email: ")
+    if user_email.count(" ") > 0:
+        raise ValueError("Error: Email cannot contain space characters!")
 
-    # TODO Finish function
-    if not re.search("[a-zA-z0-9.-_+]@[a-zA-Z]", user_email):
-        raise ValueError("Error: Invalid email entered")
+    if not re.search("[a-zA-Z0-9._-]+@[a-zA-Z]+.[a-z]{2,3}(.[a-z]{2})?", user_email):
+        raise ValueError("Error: Invalid email entered!")
 
-    return user_email.strip().lower()
+    return True
 
 
 def get_user_shop_name() -> str:
@@ -122,7 +122,11 @@ def run_simulation_start() -> Shop:
 
     user_full_name = get_user_full_name()
 
-    user_email = get_user_email()
+    user_email = input("Please enter your email: ")
+
+    if check_user_email(user_email):
+        # TODO - Check email on DB
+        print("email recognised")
 
     inventory_setup = select_inventory_setup()
 
