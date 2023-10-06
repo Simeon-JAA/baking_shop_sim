@@ -5,6 +5,8 @@ import sys
 import time
 import re
 
+import dotenv
+
 from component_classes import Cupcake, Shop
 
 
@@ -53,6 +55,30 @@ def select_inventory_setup() -> str:
     return inventory_setup.lower().strip()
 
 
+def get_user_full_name() -> str:
+    """Returns the users name for checking on the db"""
+
+    message_in_terminal("To begin please enter your full name")
+
+    user_full_name = input("Enter full name: ")
+
+    return user_full_name.strip().title()
+
+
+def get_user_email() -> str:
+    """Returns the users email for checking on the db"""
+
+    message_in_terminal("Please enter your email")
+
+    user_email = input("Enter email: ")
+
+    # TODO Finish function
+    if not re.search("[a-zA-z0-9.-_+]@[a-zA-Z]", user_email):
+        raise ValueError("Error: Invalid email entered")
+
+    return user_email.strip().lower()
+
+
 def get_user_shop_name() -> str:
     """Returns the user shop name"""
 
@@ -93,6 +119,10 @@ def run_simulation_start() -> Shop:
     message_in_terminal(WELCOME_MESSAGE)
     pause_terminal()
     setup_instructions()
+
+    user_full_name = get_user_full_name()
+
+    user_email = get_user_email()
 
     inventory_setup = select_inventory_setup()
 
