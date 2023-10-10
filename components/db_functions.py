@@ -19,7 +19,6 @@ def get_db_connection(config) -> connection:
     return conn
 
 
-# TODO Check return type hint
 def check_user_email_in_db(user_email: str, conn: connection) -> bool:
     """Function will return true if user email address found in db
      If not, the function will return false"""
@@ -72,7 +71,7 @@ if __name__ == "__main__":
     except ConnectionError as Err:
         Err("Error: Unable to establish connection to database!")
 
-    print(get_user_id_from_email_and_password(
-        "example_email@example.co.uk", "example_password", conn))
+    user_db_id = get_user_id_from_email_and_password(
+        "example_email@example.co.uk", "example_password", conn)
 
     conn.close()
