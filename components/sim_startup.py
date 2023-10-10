@@ -73,7 +73,7 @@ def check_user_email(user_email: str) -> bool:
     if user_email.count(" ") > 0:
         raise ValueError("Error: Email cannot contain space characters!")
 
-    if not re.search("[a-zA-Z0-9._-]+@[a-zA-Z]+.[a-z]{2,3}(.[a-z]{2})?", user_email):
+    if not re.search("[a-zA-Z0-9._-]+@[a-zA-Z]+\.[a-z]{2,3}(.[a-z]{2})?", user_email):
         raise ValueError("Error: Invalid email entered!")
 
     return True
