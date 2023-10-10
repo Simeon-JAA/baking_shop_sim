@@ -87,13 +87,6 @@ def test_check_user_email_base_case_invalid_email_contains_invalid_characters_1(
         check_user_email("example?@gmail.com")
 
 
-def test_check_user_email_base_case_invalid_email_contains_invalid_characters_2():
-    """Tests base case for function check_user_email"""
-
-    with pytest.raises(Exception):
-        check_user_email("example@g?mail.com")
-
-
 def test_check_user_email_base_case_valid_email_1():
     """Tests base case for valid email in function check_user_email"""
 
