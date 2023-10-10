@@ -1,2 +1,4 @@
 pytest
 pylint
+python-dotenv
+psycopg2
