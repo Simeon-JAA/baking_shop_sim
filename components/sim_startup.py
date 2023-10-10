@@ -5,6 +5,8 @@ import sys
 import time
 import re
 
+import dotenv
+
 from component_classes import Cupcake, Shop
 
 
@@ -53,6 +55,30 @@ def select_inventory_setup() -> str:
     return inventory_setup.lower().strip()
 
 
+def get_user_full_name() -> str:
+    """Returns the users name for checking on the db"""
+
+    message_in_terminal("To begin please enter your full name")
+
+    user_full_name = input("Enter full name: ")
+
+    return user_full_name.strip().title()
+
+
+def check_user_email(user_email: str) -> bool:
+    """Checks user email before checking the db"""
+
+    user_email = user_email.strip()
+
+    if user_email.count(" ") > 0:
+        raise ValueError("Error: Email cannot contain space characters!")
+
+    if not re.search("[a-zA-Z0-9._-]+@[a-zA-Z]+\.[a-z]{2,3}(.[a-z]{2})?", user_email):
+        raise ValueError("Error: Invalid email entered!")
+
+    return True
+
+
 def get_user_shop_name() -> str:
     """Returns the user shop name"""
 
@@ -93,6 +119,14 @@ def run_simulation_start() -> Shop:
     message_in_terminal(WELCOME_MESSAGE)
     pause_terminal()
     setup_instructions()
+
+    user_full_name = get_user_full_name()
+
+    user_email = input("Please enter your email: ")
+
+    if check_user_email(user_email):
+        # TODO - Check email on DB
+        print("email recognised")
 
     inventory_setup = select_inventory_setup()
 
